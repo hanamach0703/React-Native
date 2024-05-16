@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native"
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Image } from "react-native"
 import {Input} from "./component"
 import {Button} from "./component"
 import { useState } from "react"
@@ -15,6 +15,7 @@ const AddNoteScreen = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
     const [images, setImages] = useState([]);
+    console.log(images)
 
     const saveHandler = () => {
         dispatch(addNote({
@@ -33,7 +34,7 @@ const AddNoteScreen = () => {
                 quality: 1
             });
             if (!result.canceled) {
-                setImages([...images, result]);
+                setImages([...images, result.assets[0]]);
             }else {
                 console.log('You did not capture any image')
             }
@@ -49,7 +50,7 @@ const AddNoteScreen = () => {
                 quality: 1
             });
             if (!result.canceled) {
-                console.log(result);
+                setImages([...images, result.assets[0]]);
             }else {
                 console.log('You did not capture any image')
             }
@@ -71,7 +72,17 @@ const AddNoteScreen = () => {
                 onChangeText={setDescription}
                 multiline
             />
-            <View>
+            <View style={styles.imageContainer}>
+                {images.map((image, index) => (
+                    <Image
+                    key={index}
+                    source={{uri: image.uri}}
+                    resizeMode="cover"
+                        style={{
+                            width: 100,
+                            height: 100,
+                            borderRadius: sizes.large}}/>
+                ))}
                 <TouchableOpacity
                     style={styles.addImageContainer}
                     onPress={() => Alert.alert(
@@ -121,6 +132,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.textColors.whiteGrey,
+    },
+    imageContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     }
 });
 
