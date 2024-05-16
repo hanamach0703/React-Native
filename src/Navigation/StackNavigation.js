@@ -85,18 +85,8 @@ const StackNavigation = () => {
                 }}/>
             )}
             <Stack.Screen name='SignUpScreen' component={SignUpScreen}/>
-            <Stack.Screen name='AddNoteScreen' component={AddNoteScreen} 
-            // options={{
-            //         headerLeft: () => (
-            //             <Ionicons
-            //                 name='person-circle'
-            //                 size={24}
-            //                 color={colors.primary.blue}
-            //                 onPress={signOutHandle}
-            //             />
-            //         )
-            //     }}
-            /> 
+            <Stack.Screen name='AddNoteScreen' component={AddNoteScreen}/> 
+            
         </Stack.Navigator>
     )
 }
