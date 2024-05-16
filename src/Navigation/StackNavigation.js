@@ -8,8 +8,9 @@ import Firebase from "../../firebaseConfig";
 import { colors } from "../theme"
 import { Ionicons } from "@expo/vector-icons";
 import AddNoteScreen from "../AddNoteScreen";
-import {useNavigation} from '@react-navigation/native'
+import {useNavigation, useRoute} from '@react-navigation/native'
 import { ActivityIndicator, View } from "react-native";
+import EditNoteScreen from "../EditNoteScreen";
 
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,8 @@ const StackNavigation = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigation()
+    // const route = useRoute();
+    // console.log(route);
 
     useEffect(() => {
         const unsubcribe = onAuthStateChanged(Firebase.auth, (user) => {
@@ -85,8 +88,15 @@ const StackNavigation = () => {
                 }}/>
             )}
             <Stack.Screen name='SignUpScreen' component={SignUpScreen}/>
-            <Stack.Screen name='AddNoteScreen' component={AddNoteScreen}/> 
-            
+            <Stack.Screen name='AddNoteScreen' component={AddNoteScreen} options={{
+                headerTitleAlign: 'center',
+            }
+            }/> 
+            <Stack.Screen name='EditNoteScreen' component={EditNoteScreen} options={{
+                headerTitleAlign: 'center',
+            }
+            }/> 
+
         </Stack.Navigator>
     )
 }

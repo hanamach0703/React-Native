@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
       fontWeight: '400',
       textAlignVertical: 'top',
       textAlign: 'left',
-      color: colors.textColors.whiteGrey,
+      color: colors.textColors.black,
     }
     
 });
